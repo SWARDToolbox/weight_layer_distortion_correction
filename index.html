@@ -1,0 +1,208 @@
+<html>
+    <head>
+        <title>
+            Radial Lens Distortion Correction by Adding a Weight Layer with Inverted Foveal Models to Convolutional Neural Networks
+        </title>
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+            body {
+                background-color: #eee;
+                font-family: Open Sans;
+            }
+            .main {
+                width : 900px;
+                margin : 40px auto;
+                border-radius: 15px;
+                background-color : #fff;
+                padding : 80px;
+                box-shadow: 0px 0px 10px #999;
+            }
+            .intro {
+                display: block;
+                line-height: 140%;
+            }
+            a {
+                color: #0050e7;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration : underline;
+            }
+            a:visited {
+                color : #0050e7;
+            }
+            img.me {
+                margin-left : 25px;
+                border : 0 solid black;
+                float : right;
+                margin-bottom : 0;
+                height: 200px;
+            }
+            div.projects {
+                margin-top: 40px;
+            }
+            .project-thumb {
+                width: 277px;
+            }
+            .projects-table {
+                margin-top: 20px;
+            }
+            .description-column {
+                padding-left: 60px;
+                width: 4500px;
+                padding-bottom:10em;
+            }
+            .project-title {
+                font-size: 20px;
+                font-weight:bold;
+                padding-bottom: 5px;
+            }
+            .description {
+                text-align:justify;
+                text-justify:inter-word;
+                padding-bottom: 5px;
+                font-size: 14px;
+            }
+            .thumb-column {
+                padding-top:10px;
+                padding-bottom:10px;
+            }
+            .project_header {
+                text-align: center;
+            }
+            p.abstract {
+                text-align: justify;
+            }
+            table a:link {
+                color: #00F;
+                font-weight: bold;
+                text-decoration:none;
+            }
+            table a:visited {
+                color: #551a8b;
+                /*font-weight:bold;*/
+                text-decoration:none;
+            }
+            table a:active,
+            table a:hover {
+                color: #bd5a35;
+                text-decoration:underline;
+            }
+            table.highlight tr:hover {
+                background-color: #ffff99;
+            }
+            table {
+                font-size:16px;
+                -moz-border-radius:3px;
+                -webkit-border-radius:3px;
+                border-radius:3px;
+            }
+            table th {
+                text-align: left;
+                padding:5px 15px 15px 1px;
+                #background: #DFF0EC;
+                #background: -webkit-gradient(linear, left top, left bottom, from(#DFF0EC), to(#DFF0EC));
+                #background: -moz-linear-gradient(top,  #DFF0EC,  #DFF0EC);
+            }
+            table td{
+                text-align: left;
+            }
+            p.center {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <div>
+                <div class="project_header">
+									<h1>Radial Lens Distortion Correction by Adding a Weight Layer with Inverted Foveal Models to Convolutional Neural Networks</h1>
+									<div class="authors">
+										<a href="http://101.200.47.98">Yongjie Shi</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										Danfeng Zhang&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										Jingsi Wen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										Xin Tong&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="http://www.cis.pku.edu.cn/vision/Visual&Robot/people/ying/index.htm">Xianghua Ying</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="http://www.cis.pku.edu.cn/vision/Visual&Robot/people/zha/">Hongbin Zha</a>
+									</div><br>
+
+									<div class="affiliations">
+										Key Lab of Machine Perception (MOE)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										School of Electronics Engineering and Computer Science&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Peking University&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									</div><br>
+
+									<div class="affiliations">
+										[<a href="./bare_conf.pdf">Paper</a>]
+									</div>
+                </div>
+            </div>
+
+            <h2>Abstract</h2>
+            <p class="abstract">
+Radial lens distortion often exists in images taken by commercial cameras, which does not satisfy the assumption of pinhole camera model. Eliminating the radial lens distortion of an image is necessary as a preprocessing step for many vision applications. Some paper has employed Convolutional Neural Networks (CNNs), to achieve radial distortion correction. They generated images with a large number of images of high variation of radial distortion, which can be well exploited by deep CNN with a high learning capacity, and reach the state-of-the-art results. In this paper, we claim that a weight layer with inverted foveal models can be added to these existing CNNs methods for radial distortion correction. In the widely used very deep Resnet-18 model, our method achieves about 20 percent decrease in the loss function with faster convergence compared to the previous methods.
+            </p>
+						<br>
+
+						<h2>Our system overview</h2>
+            <p class="abstract">
+              We synthesize image datasets by generating radial lens distorted images simulated from real images in
+              <a href="http://www.image-net.org/papers/imagenet_cvpr09.pdf">ImageNet</a>.
+              The synthetic datasets are input into our CNN added by an inverted foveal layers and
+              train it to map its synthesized distortion
+              coefficients. The learned framework is applied to estimate the distortion coefficients of real images.
+            </p>
+						<br>
+						<img src="images/liucheng-eps-converted-to.jpg" border="0" width="100%"/></center>
+						<br>
+						<br>
+
+						<h2>Network structure</h2>
+            We add an inverted foveal weight
+            layer in the end of convolution layer of Alexnet and Resnet-18, followed by fully connected layer. Feature
+            maps output from the final convolutional layers are multiply by the inverted foveal
+            weight layers.
+            <img src="images/network.jpg" border="0" width="95%"/></center>
+						<h2>Qualitative Results</h2>
+            Loss curve of Alexnet and Resnet-18 can be seen in follows.
+            <br>
+            <img src="images/alex-eps-converted-to.jpg" width="48%"/> <img src="images/res18-eps-converted-to.jpg" width="48%"/>
+						<br>
+						<br>
+
+						<h2>Distortion correction results</h2>
+            <h4>[1st-Input distorted images, 2nd-Correct results using method proposed by <a href="https://link.springer.com/chapter/10.1007/978-3-319-54187-7_3">Rong et al</a>, 3nd-Correct results using our method]</h4>
+						<img src="result/n04335435_3533.JPEG" width="33%"/> <img src="result/n04335435_3533_no_gaussian.JPEG" width="33%"/> <img src="result/n04335435_3533_gaussian.JPEG" width="33%"/>
+            <img src="result/n04535252_706.JPEG" width="33%"/> <img src="result/n04535252_706_no_gaussian.JPEG" width="33%"/> <img src="result/n04535252_706_gaussian.JPEG" width="33%"/>
+            <img src="result/n04305210_1255.JPEG" width="33%"/> <img src="result/n04305210_1255_no_gaussian.JPEG" width="33%"/> <img src="result/n04305210_1255_gaussian.JPEG" width="33%"/>
+            <img src="result/n04335435_14135.JPEG" width="33%"/> <img src="result/n04335435_14135_no_gaussian.JPEG" width="33%"/> <img src="result/n04335435_14135_gaussian.JPEG" width="33%"/>
+            <img src="result/n04535252_9731.JPEG" width="33%"/> <img src="result/n04535252_9731_no_gaussian.JPEG" width="33%"/> <img src="result/n04535252_9731_gaussian.JPEG" width="33%"/>
+
+
+            <br>
+						<br>
+            <h2>Dataset</h2>
+            The Dataset of this paper can be found in <a herf="101.200.47.98">GoogleDrive</a> or <a href="101.200.47.98">BaiduPan</a>.
+            <br>
+						<br>
+            <h2>Publication</h2>
+            <b>Radial Lens Distortion Correction by Adding a Weight Layer with Inverted Foveal Models to Convolutional Neural Networks</b>.<br>
+						Yongjie Shi, Danfeng Zhang, Jingsi Wen, Xin Tong, Xianghua Ying. Hongbin Zha<br>
+						International Conference on Pattern Recognition  (ICPR 2018)<br>
+
+            <h2>BibTeX</h2>
+            <pre>@inproceedings{yongjie_icpr2018,
+  title = {Radial Lens Distortion Correction by Adding a Weight Layer with Inverted Foveal
+    Models to Convolutional Neural Networks}
+  author = {Yongjie Shi, Danfeng Zhang, Jingsi Wen, Xin Tong, Xianghua Ying, Hongbin Zha},
+  booktitle = {International Conference on Pattern Recognition (ICPR)},
+  month = {August},
+  year = {2018}
+}</pre>
+
+            <h2>Primary Contact</h2>
+            Xianghua Ying(xhying -at- cis.pku.edu.cn)
+
+        </div>
+    </body>
+</html>
